@@ -1,0 +1,4 @@
+let base = 5;
+let height = 6;
+let triangleArea = (base * height) / 2;
+console.log(`The area of the triangle is ${triangleArea} square units.`);

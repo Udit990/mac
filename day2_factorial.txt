@@ -1,0 +1,6 @@
+let num = -10;
+let result = 1;
+for (let i = num; i > 1; i--) {
+  result *= i;
+}
+console.log(`The factorial of ${num} is ${result}.`);
