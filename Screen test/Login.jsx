@@ -1,5 +1,5 @@
-import { View, Text, TextInput, TouchableOpacity, SafeAreaView, StyleSheet } from 'react-native';
 import React, { useContext, useState, useEffect } from 'react';
+import { View, Text, TextInput, TouchableOpacity, SafeAreaView, StyleSheet } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
@@ -46,12 +46,8 @@ const Login = () => {
     <SafeAreaView style={styles.container}>
       <View style={styles.subContainer}>
         <View>
-          <Text style={{ fontSize: 27, fontWeight: 'bold', textAlign: 'center', color: '#2B2B52' }}>
-            Welcome Back
-          </Text>
-          <Text style={{ fontSize: 15, textAlign: 'center', color: '#2B2B52' }}>
-            Enter your details below
-          </Text>
+          <Text style={styles.welcomeText}>Welcome Back</Text>
+          <Text style={styles.subtitleText}>Enter your details below</Text>
         </View>
         <View>
           <TextInput
@@ -69,14 +65,14 @@ const Login = () => {
           />
         </View>
       </View>
-      <TouchableOpacity style={styles.btn3} onPress={() => navigation.navigate('Signup')}>
-        <Text style={{ textAlign: 'center', color: '#2C3335', fontSize: 14 }}>Get Started</Text>
+      <TouchableOpacity style={styles.getStartedBtn} onPress={() => navigation.navigate('Signup')}>
+        <Text style={styles.getStartedText}>Get Started</Text>
       </TouchableOpacity>
       <View>
-        <TouchableOpacity style={styles.btn} onPress={handleLogin}>
-          <Text style={{ textAlign: 'center', color: '#DAE0E2', fontSize: 17 }}>Log in</Text>
+        <TouchableOpacity style={styles.loginBtn} onPress={handleLogin}>
+          <Text style={styles.loginText}>Log in</Text>
         </TouchableOpacity>
-        <Text style={{ textAlign: 'center', marginTop: 10 }}>Forgot your password?</Text>
+        <Text style={styles.forgotPasswordText}>Forgot your password?</Text>
       </View>
     </SafeAreaView>
   );
@@ -95,45 +91,67 @@ const styles = StyleSheet.create({
     padding: 20,
     backgroundColor: '#218F76',
     width: '100%',
-    height: '100%',
-    marginBottom: '25%',
-    bottom: 0,
+    height: '70%',
     position: 'absolute',
+    bottom: 0,
     borderBottomLeftRadius: 60,
     borderBottomRightRadius: 60,
-    flex: 1,
     justifyContent: 'flex-end',
   },
+  welcomeText: {
+    fontSize: 27,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    color: '#2B2B52',
+  },
+  subtitleText: {
+    fontSize: 15,
+    textAlign: 'center',
+    color: '#2B2B52',
+  },
   inputBox: {
-    top: 30,
+    marginTop: 30,
     height: 40,
     borderColor: '#2B2B52',
     borderWidth: 1,
     paddingHorizontal: 10,
-    marginBottom: 60,
+    marginBottom: 20,
     borderRadius: 5,
   },
   inputBox1: {
     marginTop: 200,
   },
-  btn: {
+  loginBtn: {
     padding: 15,
     backgroundColor: '#2B2B52',
     borderRadius: 99,
-    marginTop: 530,
+    marginTop: 30,
   },
-  btn3: {
+  loginText: {
+    textAlign: 'center',
+    color: '#DAE0E2',
+    fontSize: 17,
+  },
+  getStartedBtn: {
     opacity: 0.6,
-    left: 140,
-    marginBottom: 100,
+    alignSelf: 'center',
+    marginBottom: 20,
     padding: 8,
     width: 90,
     height: 40,
     backgroundColor: '#EAF0F1',
     borderRadius: 10,
-    gap: 10,
     justifyContent: 'center',
     alignItems: 'center',
     flexDirection: 'row',
+  },
+  getStartedText: {
+    textAlign: 'center',
+    color: '#2C3335',
+    fontSize: 14,
+  },
+  forgotPasswordText: {
+    textAlign: 'center',
+    marginTop: 10,
   },
 });
