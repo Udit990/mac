@@ -1,41 +1,44 @@
-import React, { createContext, useState } from 'react';
+import React from 'react';
+import { StyleSheet, Text, View } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import Gstart from './screens/Gstart';
+import Login from './screens/Login';
+import SignUp from './screens/Signup';
+import Dashboard from './screens/Dashboard';
+import TabNavigation from './screens/TabNavigation';
+import Help from './screens/Help';
+import { CartProvider } from './screens/CartContext';
 
-export const CartContext = createContext();
+const Stack = createStackNavigator();
 
-export const CartProvider = ({ children }) => {
-  const [cart, setCart] = useState([]);
-
-  const addToCart = (product) => {
-    setCart((prevCart) => {
-      const existingItem = prevCart.find(item => item.id === product.id);
-      if (existingItem) {
-        return prevCart.map(item =>
-          item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item
-        );
-      }
-      return [...prevCart, { ...product, quantity: 1 }];
-    });
-  };
-
-  const removeFromCart = (productId) => {
-    setCart((prevCart) => {
-      const existingItem = prevCart.find(item => item.id === productId);
-      if (existingItem.quantity === 1) {
-        return prevCart.filter(item => item.id !== productId);
-      }
-      return prevCart.map(item =>
-        item.id === productId ? { ...item, quantity: item.quantity - 1 } : item
-      );
-    });
-  };
-
-  const clearCart = () => {
-    setCart([]);
-  };
-
+function StackNavigator() {
   return (
-    <CartContext.Provider value={{ cart, addToCart, removeFromCart, clearCart }}>
-      {children}
-    </CartContext.Provider>
+    <Stack.Navigator>
+      <Stack.Screen name='GetStarted' component={Gstart} options={{ headerShown: false }}/>
+      <Stack.Screen name='Signup' component={SignUp} options={{ headerShown: false }}/>
+      <Stack.Screen name='Login' component={Login} options={{ headerShown: false }}/>
+      <Stack.Screen name='Home' component={TabNavigation} options={{ headerShown: false }}/>
+      <Stack.Screen name='Help' component={Help}/>
+    </Stack.Navigator>
   );
-};
+}
+
+export default function App() {
+  return (
+    <CartProvider>
+      <NavigationContainer>
+        <StackNavigator />
+      </NavigationContainer>
+    </CartProvider>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#ADD8E6', // Light blue background color
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+});
